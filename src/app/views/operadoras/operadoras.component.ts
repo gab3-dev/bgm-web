@@ -17,7 +17,11 @@ export class OperadorasComponent {
   fieldInfoList: FieldInfo[] = [];
   operadoraService: OperadoraService = inject(OperadoraService);
 
+  save() {
+    this.operadoraService.createOperadora();
+  }
+
   constructor() {
-    this.fieldInfoList = this.operadoraService.getAllHousingLocations();
+    this.fieldInfoList = this.operadoraService.getAllFields();
   }
 }
