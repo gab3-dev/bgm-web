@@ -103,7 +103,11 @@ export class OperadoraService {
   public createOperadora(data: any) {    
     console.log(data);
 
-    this.http.post('http://localhost:9999/create-operadora', data).subscribe((res) => {
+    this.http.post('http://localhost:9999/create-operadora', {
+      headers: {
+        'Content-Type': 'application/json'
+      }, data,
+    }).subscribe((res) => {
       console.log(res);
     });
   }  
