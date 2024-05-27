@@ -1,2 +1,7 @@
-<app-text-field *ngFor="let fieldInfo of fieldInfoList" [fieldInfo]="fieldInfo"></app-text-field>
-<button type="button" (click)="save()">Salvar</button>
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div *ngFor="let fieldInfo of fieldInfoList" class="text-field">
+        <label>{{fieldInfo.label}}</label>
+        <input id="{{fieldInfo.id}}" type="{{fieldInfo.type}}" name="{{fieldInfo.name}}" placeholder="{{fieldInfo.placeholder}}" ngModel />
+    </div>    
+    <input type="submit" value="Enviar" />
+</form>

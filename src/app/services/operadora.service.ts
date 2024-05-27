@@ -11,7 +11,7 @@ export class OperadoraService {
   fieldInfoList: FieldInfo[] = [
     {
       id: 1,
-      name: 'data-operacao',
+      name: 'dataOperacao',
       label: 'Data da Operação',
       type: 'text',
       required: true,
@@ -56,7 +56,7 @@ export class OperadoraService {
     },
     {
       id: 6,
-      name: 'razao-social',
+      name: 'razaoSocial',
       label: 'Razao Social',
       type: 'text',
       required: true,
@@ -76,7 +76,7 @@ export class OperadoraService {
       id: 8,
       name: 'email',
       label: 'Email',
-      type: 'text',
+      type: 'email',
       required: true,
       placeholder: 'Digite o Email da operadora',
       value: ''
@@ -100,28 +100,7 @@ export class OperadoraService {
     return this.fieldInfoList.find(fieldInfoList => fieldInfoList.id === id);
   }
 
-  public createOperadora() {
-    let dataOperacao = this.fieldInfoList.find(fieldInfoList => fieldInfoList.name === 'data-operacao')?.value;
-    let responsavel = this.fieldInfoList.find(fieldInfoList => fieldInfoList.name === 'responsavel')?.value;
-    let grupo = this.fieldInfoList.find(fieldInfoList => fieldInfoList.name === 'grupo')?.value;
-    let codigo = this.fieldInfoList.find(fieldInfoList => fieldInfoList.name === 'codigo')?.value;
-    let operadora = this.fieldInfoList.find(fieldInfoList => fieldInfoList.name === 'operadora')?.value;
-    let razaoSocial = this.fieldInfoList.find(fieldInfoList => fieldInfoList.name === 'razao-social')?.value;
-    let cnpj = this.fieldInfoList.find(fieldInfoList => fieldInfoList.name === 'cnpj')?.value;
-    let email = this.fieldInfoList.find(fieldInfoList => fieldInfoList.name === 'email')?.value;
-    let telefone = this.fieldInfoList.find(fieldInfoList => fieldInfoList.name === 'telefone')?.value;
-
-    let data = {
-      dataOperacao: dataOperacao,
-      responsavel: responsavel,
-      grupo: grupo,
-      codigo: codigo,
-      operadora: operadora,
-      razaoSocial: razaoSocial,
-      cnpj: cnpj,
-      email: email,
-      telefone: telefone
-    }
+  public createOperadora(data: any) {    
     console.log(data);
 
     this.http.post('http://localhost:9999/create-operadora', data).subscribe((res) => {

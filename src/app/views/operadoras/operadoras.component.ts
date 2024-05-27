@@ -1,15 +1,16 @@
-import { Component, inject } from '@angular/core';
+import { Component, NgModule, inject } from '@angular/core';
 import { FieldInfo } from '../../models/field-info';
 import { OperadoraService } from '../../services/operadora.service';
 import { TextFieldComponent } from "../../components/text-field/text-field.component";
 import { NgFor } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
     selector: 'app-operadoras',
     standalone: true,
     templateUrl: './operadoras.component.html',
     styleUrl: './operadoras.component.scss',
-    imports: [TextFieldComponent, NgFor]
+    imports: [TextFieldComponent, NgFor, FormsModule]
 })
 
 export class OperadorasComponent {
@@ -17,8 +18,8 @@ export class OperadorasComponent {
   fieldInfoList: FieldInfo[] = [];
   operadoraService: OperadoraService = inject(OperadoraService);
 
-  save() {
-    this.operadoraService.createOperadora();
+  onSubmit(form: NgForm) {
+    this.operadoraService.createOperadora(form.value);
   }
 
   constructor() {
