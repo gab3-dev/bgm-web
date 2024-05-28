@@ -11,7 +11,7 @@ export class OperadoraService {
   fieldInfoList: FieldInfo[] = [
     {
       id: 1,
-      name: 'dataOperacao',
+      name: 'data_operacao',
       label: 'Data da Operação',
       type: 'text',
       required: true,
@@ -38,9 +38,9 @@ export class OperadoraService {
     },
     {
       id: 4,
-      name: 'codigo',
+      name: 'codigo_operadora',
       label: 'Codigo da Operadora',
-      type: 'text',
+      type: 'number',
       required: true,
       placeholder: 'Digite o Codigo da operadora',
       value: ''
@@ -56,7 +56,7 @@ export class OperadoraService {
     },
     {
       id: 6,
-      name: 'razaoSocial',
+      name: 'razao_social',
       label: 'Razao Social',
       type: 'text',
       required: true,
@@ -102,13 +102,18 @@ export class OperadoraService {
 
   public createOperadora(data: any) {    
     console.log(data);
+    data.codigo_operadora = parseInt(data.codigo_operadora);
 
-    this.http.post('http://localhost:9999/create-operadora', {
+    this.http.post('http://ec2-18-230-5-144.sa-east-1.compute.amazonaws.com:9999/create-operadora', data,{
       headers: {
         'Content-Type': 'application/json'
-      }, data,
-    }).subscribe((res) => {
-      console.log(res);
+      },
+      responseType: 'text',
+      observe: 'response',
+    },).subscribe(response => {
+      if(response.status === 200) {
+        alert(response.body);
+      }
     });
   }  
 }
