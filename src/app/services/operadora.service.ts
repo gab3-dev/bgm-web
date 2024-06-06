@@ -13,7 +13,7 @@ export class OperadoraService {
       id: 1,
       name: 'data_operacao',
       label: 'Data da Operação',
-      type: 'text',
+      type: 'date',
       required: true,
       placeholder: 'Digite a Data da operacao',
       value: ''    
@@ -96,15 +96,11 @@ export class OperadoraService {
     return this.fieldInfoList;
   }
   
-  getFieldById(id: number): FieldInfo | undefined {
-    return this.fieldInfoList.find(fieldInfoList => fieldInfoList.id === id);
-  }
-
-  public createOperadora(data: any) {    
+  createOperadora(data: any) {
     console.log(data);
     data.codigo_operadora = parseInt(data.codigo_operadora);
 
-    this.http.post('http://ec2-18-230-5-144.sa-east-1.compute.amazonaws.com:9999/create-operadora', data,{
+    this.http.post('http://ec2-52-67-218-45.sa-east-1.compute.amazonaws.com:9999/create-operadora', data,{
       headers: {
         'Content-Type': 'application/json'
       },
@@ -115,5 +111,5 @@ export class OperadoraService {
         alert(response.body);
       }
     });
-  }  
+  }
 }
