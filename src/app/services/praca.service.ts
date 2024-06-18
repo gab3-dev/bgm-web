@@ -206,21 +206,28 @@ export class PracaService {
 
   async createPraca(data: any) {
     data = parsePracaJson(data);
-      this.http.post('http://ec2-52-67-218-45.sa-east-1.compute.amazonaws.com:9999/create-praca', data, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        responseType: 'text',
-        observe: 'response',
-      },).subscribe(response => {
+    this.http.post('http://ec2-52-67-218-45.sa-east-1.compute.amazonaws.com:9999/create-praca', data, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      observe: 'response',
+    }).subscribe({
+      next: response => {
         if (response.status === 200) {
           alert(response.body);
         } else {
           alert(response.body);
         }
-      });
-    } catch (e) {
-      alert(e);
-    }
+      },
+      complete: () => {
+        console.log('Requisição completa');
+        alert('Praça criada com sucesso');
+      },
+      error: error => {
+        if (error)
+          console.log(error);
+        alert('Erro ao criar a praça');
+      }
+    });
   }
 }
