@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FieldInfo } from '../models/field-info';
 import { HttpClient } from '@angular/common/http';
+import { parseOperadoraJson } from '../utils/handle';
 
 @Injectable({
   providedIn: 'root'
@@ -97,8 +98,7 @@ export class OperadoraService {
   }
   
   createOperadora(data: any) {
-    console.log(data);
-    data.codigo_operadora = parseInt(data.codigo_operadora);
+    data = parseOperadoraJson(data);
 
     this.http.post('http://ec2-52-67-218-45.sa-east-1.compute.amazonaws.com:9999/create-operadora', data,{
       headers: {

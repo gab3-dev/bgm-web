@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FieldInfo } from '../models/field-info';
 import { HttpClient } from '@angular/common/http';
-import e from 'express';
+import { parsePracaJson } from '../utils/handle';
 
 @Injectable({
   providedIn: 'root'
@@ -204,20 +204,8 @@ export class PracaService {
     return this.fieldInfoList;
   }
 
-  createPraca(data: any) {
-    console.log(JSON.stringify(data));
-    data.codigo = parseInt(data.codigo);
-    data.longitude = parseInt(data.longitude);
-    data.latitude = parseInt(data.latitude);
-    data.codigo_operadora = parseInt(data.codigo_operadora);
-    data.km = parseInt(data.km);
-    data.codigo_praca = parseInt(data.codigo_praca);
-    if (data.cobranca_especial === 'true')
-      data.cobranca_especial = true;
-    else
-      data.cobranca_especial = false;
-
-    try {
+  async createPraca(data: any) {
+    data = parsePracaJson(data);
       this.http.post('http://ec2-52-67-218-45.sa-east-1.compute.amazonaws.com:9999/create-praca', data, {
         headers: {
           'Content-Type': 'application/json'
